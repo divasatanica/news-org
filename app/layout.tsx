@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Inter } from "next/font/google";
+import { TopNav } from "./_components/top-nav";
 import "./globals.css";
+import { TopNavNext } from "./_components/top-nav-next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +19,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <TopNavNext />
+        {children}
+        <Script src="https://accounts.google.com/gsi/client" async={true} strategy="beforeInteractive"></Script>
+      </body>
     </html>
   );
 }
