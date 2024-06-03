@@ -1,3 +1,4 @@
+'use client';
 import Image from 'next/image';
 import { Session } from 'next-auth';
 import { Button } from '@/components/ui/button';
@@ -18,7 +19,6 @@ export function UserInfo(props: IProps) {
       <Image loader={({ src, width }) => `${src}?width={${width}}`} alt="avatar" src={userInfo.user?.image || ''} width={40} height={40} />
     </section>
     <form action={async () => {
-      'use server';
       await signOut({ redirectTo: '/' });
     }}>
       <Button>
