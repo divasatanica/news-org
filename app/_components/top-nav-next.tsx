@@ -1,5 +1,6 @@
 import { auth } from "../auth"
 import { GoogleSignIn } from "./google-sign-in-next";
+import { UserInfo } from "./user-info";
 
 export async function TopNavNext() {
   const user = await auth();
@@ -9,7 +10,7 @@ export async function TopNavNext() {
 
     </section>
     <section style={{ width: '20%' }}>
-      <GoogleSignIn />
+      {user == null ? <GoogleSignIn /> : <UserInfo userInfo={user} />}
     </section>
   </nav>
 }

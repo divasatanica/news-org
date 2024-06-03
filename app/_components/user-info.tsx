@@ -1,10 +1,10 @@
-"use client";
-
 import Image from 'next/image';
-import { GoogleLoginPayload } from "./google-sign-in";
+import { Session } from 'next-auth';
+import { Button } from '@/components/ui/button';
+import { signOut } from '../auth';
 
 interface IProps {
-  userInfo: GoogleLoginPayload;
+  userInfo: Session;
 }
 
 export function UserInfo(props: IProps) {
@@ -12,11 +12,18 @@ export function UserInfo(props: IProps) {
 
   return <section className="flex items-center">
     <section>
-      {userInfo.name}
+      {userInfo.user?.name}
     </section>
     <section className="overflow-hidden" style={{ borderRadius: '50%' }}>
-      <Image loader={({ src, width }) => `${src}?width={${width}}`} alt="avatar" src={userInfo.picture} width={40} height={40} />
+      <Image loader={({ src, width }) => `${src}?width={${width}}`} alt="avatar" src={userInfo.user?.image || ''} width={40} height={40} />
     </section>
-    
+    <form action={async () => {
+      'use server';
+      await signOut({ redirectTo: '/' });
+    }}>
+      <Button>
+        Sign Out
+      </Button>
+    </form>
   </section>
 }

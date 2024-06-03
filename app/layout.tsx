@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { Inter } from "next/font/google";
-import { TopNav } from "./_components/top-nav";
 import "./globals.css";
 import { TopNavNext } from "./_components/top-nav-next";
 
